@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Happy Birthday, Dhruv ❤️</title>
+<style>
+  /* Reset & base */
+  body, html {
+    margin: 0; padding: 0; height: 100%;
+    background: radial-gradient(ellipse at bottom, #0b0a0f 0%, #1a1a1a 80%);
+    color: #d4af37; /* gold */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+  }
+  h1 {
+    font-size: 3.5rem;
+    text-align: center;
+    margin-top: 2rem;
+    color: #f7cac9; /* rose gold */
+    text-shadow: 0 0 10px #d4af37;
+  }
+  h2 {
+    text-align: center;
+    color: #f7cac9;
+    font-weight: 400;
+  }
+  /* Reformat love letter */
+  p.love-letter {
+    max-width: 600px;
+    margin: 2rem auto;
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: #fff1e0;
+    background: rgba(212, 175, 55, 0.12);
+    padding: 2rem 2.5rem;
+    border-radius: 18px;
+    box-shadow: 0 0 25px #d4af37bb;
+    font-style: italic;
+    letter-spacing: 0.02em;
+    white-space: pre-line;
+  }
+  footer {
+    text-align: center;
+    padding: 1rem 1rem 3rem 1rem;
+    font-size: 1.3rem;
+    color: #f7cac9;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  /* Starry night background stars */
+  .stars {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(2px 2px at 20% 30%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 40% 50%, #fff, transparent),
+      radial-gradient(2.5px 2.5px at 70% 20%, #fff, transparent),
+      radial-gradient(1.7px 1.7px at 80% 80%, #fff, transparent),
+      radial-gradient(1.2px 1.2px at 10% 75%, #fff, transparent);
+    background-repeat: repeat;
+    animation: twinkle 5s infinite alternate;
+  }
+  @keyframes twinkle {
+    0%, 100% { background-position:
+      20% 30%, 40% 50%, 70% 20%, 80% 80%, 10% 75%;
+      opacity: 1;
+    }
+    50% {
+      background-position:
+      22% 33%, 38% 53%, 68% 18%, 82% 78%, 12% 73%;
+      opacity: 0.8;
+    }
+  }
+
+  /* Confetti container and shapes */
+  .confetti {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+    overflow: visible;
+  }
+  .confetti-piece {
+    position: absolute;
+    width: 8px; height: 14px;
+    background-color: #d4af37;
+    opacity: 0.9;
+    border-radius: 3px;
+    animation-name: confetti-fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  @keyframes confetti-fall {
+    0% { transform: translateY(-20px) rotate(0deg); opacity: 1;}
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0;}
+  }
+
+  /* Popup overlay */
+  #popup {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1500;
+    cursor: pointer;
+  }
+  #popup .popup-content {
+    background: #1a1a1a;
+    border: 2px solid #d4af37;
+    border-radius: 15px;
+    padding: 2rem 3rem;
+    color: #f7cac9;
+    font-size: 2rem;
+    text-align: center;
+    box-shadow: 0 0 20px #d4af37;
+    user-select: none;
+  }
+
+  /* Vouchers container */
+  section.vouchers {
+    max-width: 900px;
+    margin: 2rem auto 5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.2rem;
+    z-index: 10;
+    position: relative;
+  }
+
+  /* Voucher envelope styling */
+  .voucher-envelope {
+    width: 180px;
+    height: 120px;
+    perspective: 800px;
+    cursor: pointer;
+    border-radius: 12px;
+    box-shadow: 0 0 10px #d4af37aa;
+    background: linear-gradient(135deg, #000000dd, #2a2a2add);
+    border: 2px solid #d4af37;
+    position: relative;
+    user-select: none;
+    transition: box-shadow 0.3s ease;
+  }
+  .voucher-envelope:focus {
+    outline: 2px solid #f7cac9;
+  }
+  .voucher-envelope.used {
+    opacity: 0.6;
+    cursor: default;
+    box-shadow: 0 0 10px #555;
+  }
+
+  .voucher-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.7s;
+    transform-style: preserve-3d;
+    border-radius: 12px;
+  }
+  .voucher-envelope.flipped .voucher-inner {
+    transform: rotateY(180deg);
+  }
+  .voucher-front, .voucher-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    padding: 1rem;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #d4af37;
+    text-align: center;
+    user-select: none;
+  }
+  .voucher-front {
+    background: linear-gradient(135deg, #000000dd, #3a3a3add);
+  }
+  .voucher-back {
+    background: linear-gradient(135deg, #d4af37dd, #f7cac9dd);
+    color: #222;
+    transform: rotateY(180deg);
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .voucher-back .text {
+    margin-bottom: 1rem;
+  }
+  .mark-used {
+    background-color: #b8860b;
+    border: none;
+    border-radius: 6px;
+    padding: 0.4rem 0.8rem;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .mark-used:hover:not(:disabled) {
+    background-color: #ffd700;
+    color: #222;
+  }
+  .mark-used:disabled {
+    cursor: default;
+    background-color: #444;
+  }
+
+  /* Music player styling */
+  #music-player {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    background: rgba(0,0,0,0.6);
+    border-radius: 20px;
+    padding: 0.2rem 0.6rem;
+    box-shadow: 0 0 10px #d4af37aa;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  #play-music-btn {
+    background: #d4af37;
+    border: none;
+    color: #1a1a1a;
+    font-weight: 700;
+    border-radius: 12px;
+    padding: 0.3rem 0.7rem;
+    cursor: pointer;
+    box-shadow: 0 0 10px #d4af37;
+    font-size: 1rem;
+  }
+  #play-music-btn:hover {
+    background: #f7cac9;
+  }
+  #music {
+    outline: none;
+  }
+
+  /* Vouchers heading container */
+  .vouchers-header {
+    max-width: 900px;
+    margin: 1rem auto 0.5rem;
+    background: rgba(212, 175, 55, 0.15);
+    border: 2px solid #d4af37;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    color: #f7cac9;
+    box-shadow: 0 0 10px #d4af37aa;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+  .vouchers-subheader {
+    max-width: 900px;
+    margin: 0 auto 1rem;
+    text-align: center;
+    font-size: 1rem;
+    font-style: italic;
+    color: #d4af37aa;
+    user-select: none;
+  }
+
+  /* Responsive */
+  @media(max-width: 600px) {
+    h1 { font-size: 2.5rem; }
+    section.vouchers {
+      max-width: 95vw;
+      gap: 0.8rem;
+    }
+    .voucher-envelope {
+      width: 140px;
+      height: 100px;
+      font-size: 0.9rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+<div class="confetti"></div>
+
+<header>
+  <h1>Happy Birthday, Dhruv ❤️</h1>
+  <h2>To my Baby, my love from Assam to Gandhinagar.</h2>
+</header>
+
+<section>
+  <p class="love-letter">
+    Booboo❤️,<br><br>
+    Happy birthday to the man who fills my life with magic and joy.<br>
+    Your smile lights up my darkest days, and your love warms my heart beyond words.<br><br>
+    No matter the miles between Gandhinagar and Assam,<br>
+    my love for you grows stronger every day.<br><br>
+    You are my best friend, my confidant, my everything.<br><br>
+    <strong>I love you Booboo ❤️</strong>
+  </p>
+</section>
+
+<!-- Music player and control -->
+<div id="music-player" role="region" aria-label="Music Player">
+  <button id="play-music-btn" aria-label="Play music">Play Music 🎵</button>
+  <audio id="music" loop preload="auto">
+    <source src="https://cdn.jsdelivr.net/gh/ayushchandel/mymp3/Ishq%20Hai%20-%20Mismatched%20Song.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+</div>
+
+<!-- Vouchers heading -->
+<div class="vouchers-header" tabindex="0">
+  My Love, Your Treats - Happy Birthday! 
+</div>
+<div class="vouchers-subheader" aria-live="polite" tabindex="0">
+  P.S: Voucher can be redeemed only once
+</div>
+
+<!-- Vouchers Section -->
+<section class="vouchers" aria-label="Love Vouchers">
+  <!-- Vouchers will be inserted here by JS -->
+</section>
+
+<footer>
+  <!-- Removed the old line; replaced with simple love message -->
+</footer>
+
+<script>
+  // Confetti generation
+  const confettiContainer = document.querySelector('.confetti');
+  function createConfetti() {
+    const colors = ['#d4af37', '#f7cac9', '#b8860b'];
+    for(let i=0; i<80; i++) {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti-piece');
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.animationDuration = 3 + Math.random() * 3 + 's';
+      confetti.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+      confetti.style.animationDelay = (Math.random() * 5) + 's';
+      confetti.style.transform = `rotate(${Math.random()*360}deg)`;
+      confettiContainer.appendChild(confetti);
+    }
+  }
+  createConfetti();
+
+  // Popup close on click or Enter key if exists
+  const popup = document.getElementById('popup');
+  if(popup) {
+    popup.addEventListener('click', () => popup.style.display = 'none');
+    popup.addEventListener('keydown', e => {
+      if(e.key === 'Enter' || e.key === 'Escape') popup.style.display = 'none';
+    });
+    popup.focus();
+  }
+
+  // Music play button logic
+  const playBtn = document.getElementById('play-music-btn');
+  const music = document.getElementById('music');
+  playBtn.addEventListener('click', () => {
+    if (music.paused) {
+      music.play().then(() => {
+        playBtn.textContent = 'Pause Music ⏸️';
+        playBtn.setAttribute('aria-label', 'Pause music');
+      }).catch(() => {
+        alert('Music play failed. Please interact with the page.');
+      });
+    } else {
+      music.pause();
+      playBtn.textContent = 'Play Music 🎵';
+      playBtn.setAttribute('aria-label', 'Play music');
+    }
+  });
+
+  // Voucher data
+  const vouchersData = [
+    { title: 'No-Fight Day Voucher', text: 'Let’s press pause — no fights, just cuddles.' },
+    { title: 'Kissing Voucher', text: 'Redeem for unlimited kisses. No expiry, no refunds.' },
+    { title: 'Candlelight Dinner (Cooked by Me)', text: 'A cozy, homemade meal made with love and masalas.' },
+    { title: 'Night Out Voucher', text: 'I’ll plan a night out — dress up, dance, or drive around. You choose!' },
+    { title: 'Netflix & Cuddle Voucher', text: 'Blanket, snacks, and your favorite person (me). Let’s binge and snuggle.' },
+    { title: 'Back Massage Voucher', text: 'Good vibes and magic hands — exclusively for you.' },
+    { title: '“You Pick, I Follow” Day', text: 'Whatever you want, wherever you go — I’ll be your shadow for the day.' },
+    { title: '“I’ll Shut Up Now” Voucher', text: 'You win every argument for one full day. Enjoy it 😜' },
+    { title: 'Midnight Drive + Ice Cream Date', text: 'Late night roads, music, and two scoops of happiness.' },
+    { title: 'Shopping Date Voucher', text: 'Let’s shop! No complaints, no eye-rolls — I promise.' },
+    { title: 'Hot Chocolate & Rainy Day Hug', text: 'Only valid on rainy days and warm hearts.' },
+    { title: 'Lazy Day in Bed Together', text: 'No alarms, just us. Doing nothing, perfectly.' },
+    { title: 'Hug Me Tight Voucher', text: 'Extra long, extra tight, extra warm. Anytime you need it.' },
+    { title: 'Ghar Ka Spa Day Voucher', text: 'A pamper day at home — face masks, massages, and giggles.' },
+    { title: 'One Big Sorry Voucher', text: 'For when I mess up. One free get-out-of-trouble card!' },
+    { title: 'Photo Shoot Day', text: 'We get dressed, take cute couple pics, and capture us.' },
+    { title: 'Special Gujarati Thali Made by Me', text: 'Love served on a plate, with dhokla and my dil 💛' },
+    { title: 'Shower Together Voucher', text: 'Because we save water… and it’s fun. 😇' },
+    { title: 'Sleep on Call Voucher', text: 'Even if we’re apart, let’s fall asleep on the phone together.' },
+    { title: 'One Wish Voucher', text: 'You make a wish, and I’ll do everything to make it true.' },
+    { title: 'Let’s Watch the Stars', text: 'Because you’re the brightest one in my life 🌟' },
+    { title: 'Outfit Picked by You Voucher', text: 'You choose what I wear — for a date, or just to tease you.' },
+    { title: 'Love Letter on Demand', text: 'Ask and I’ll write you a heartfelt letter. From the soul, for you.' },
+    { title: '5-Minute Eye Contact Challenge', text: 'No laughing. No talking. Just… us. Intense and beautiful.' },
+    { title: 'Cheek Kiss War Voucher', text: 'I’ll give you 20 kisses on your cheeks — in a row. Try not to blush.' },
+    { title: 'Cuddling Until You Fall Asleep', text: 'No scrolling, no distractions. Just me holding you.' }
+  ];
+
+  const vouchersContainer = document.querySelector('.vouchers');
+
+  vouchersData.forEach(({title, text}, i) => {
+    const envelope = document.createElement('div');
+    envelope.classList.add('voucher-envelope');
+    envelope.tabIndex = 0;
+    envelope.setAttribute('aria-label', `Voucher: ${title}. Press to flip and see details.`);
+
+    // Load used state from localStorage
+    const used = localStorage.getItem(`voucher-used-${i}`) === 'true';
+    if (used) {
+      envelope.classList.add('used');
+      envelope.dataset.used = 'true';
+    }
+
+    envelope.innerHTML = `
+      <div class="voucher-inner">
+        <div class="voucher-front">${title}</div>
+        <div class="voucher-back">
+          <div class="text">${text}</div>
+          <button class="mark-used" ${used ? 'disabled' : ''} aria-pressed="${used}" aria-label="Mark voucher as used">${used ? 'Used' : 'Mark Used'}</button>
+        </div>
+      </div>
+    `;
+
+    // Flip on click or keyboard enter/space
+    envelope.addEventListener('click', () => {
+      if(envelope.dataset.used === 'true') return; // don't flip if used
+      envelope.classList.toggle('flipped');
+    });
+    envelope.addEventListener('keydown', e => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        if(envelope.dataset.used === 'true') return;
+        envelope.classList.toggle('flipped');
+      }
+    });
+
+    // Mark used button logic
+    const markUsedBtn = envelope.querySelector('.mark-used');
+    markUsedBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      envelope.dataset.used = 'true';
+      envelope.classList.remove('flipped');
+      envelope.classList.add('used');
+      markUsedBtn.disabled = true;
+      markUsedBtn.setAttribute('aria-pressed', 'true');
+      envelope.setAttribute('aria-label', `${title} voucher marked as used`);
+      localStorage.setItem(`voucher-used-${i}`, 'true');
+    });
+
+    vouchersContainer.appendChild(envelope);
+  });
+</script>
+
+</body>
+</html>
